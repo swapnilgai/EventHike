@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+    <layout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools">
+        <data class="ListItemViewBinding">
+            <variable
+                name="viewModel"
+                type="com.java.eventhike.feature.home.list.ListItemViewModel"/>
+        </data>
+
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp">
 
     <ImageView
@@ -45,7 +51,8 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/ic_local_mile_away"
         app:layout_constraintTop_toBottomOf="@+id/event_time"
-        tools:layout_editor_absoluteX="16dp"/>
+        tools:layout_editor_absoluteX="16dp"
+        tools:ignore="MissingConstraints"/>
 
     <TextView
         android:id="@+id/driving_distance_label"
@@ -97,3 +104,4 @@
         app:layout_constraintTop_toBottomOf="@+id/mile_away_label"/>
 
 </android.support.constraint.ConstraintLayout>
+</layout>

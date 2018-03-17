@@ -8,12 +8,18 @@ import android.support.v7.app.AppCompatActivity
 import com.google.android.gms.location.places.Place
 import com.google.android.gms.location.places.ui.PlaceAutocomplete
 import com.java.eventhike.R
+import com.java.eventhike.feature.home.list.ListNavigator
+import com.java.eventhike.model.EventsItem
 import kotlinx.android.synthetic.main.activity_home.*
 
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), ListNavigator {
 
     val PLACE_AUTOCOMPLETE_REQUEST_CODE = 1
+
+    override fun onEventItemClick(eventsItem: EventsItem) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
