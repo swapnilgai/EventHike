@@ -13,25 +13,25 @@ import javax.inject.Singleton
  */
 
 @Module
-class NetModule(internal var mBaseUrl: String) {
+class NetModule(var mBaseUrl: String) {
 
     @Provides
     @Singleton
-    internal fun provideGson(): Gson {
+    fun provideGson(): Gson {
         return GsonBuilder()
                 .create()
     }
 
     @Provides
     @Singleton
-    internal fun getGsonConverterFactory(gson: Gson): GsonConverterFactory {
+    fun getGsonConverterFactory(gson: Gson): GsonConverterFactory {
         return GsonConverterFactory
                 .create(gson)
     }
 
     @Provides
     @Singleton
-    internal fun provideRetrofit(GsonConverterFactory: GsonConverterFactory): Retrofit {
+    fun provideRetrofit(GsonConverterFactory: GsonConverterFactory): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(mBaseUrl)
                 .addConverterFactory(GsonConverterFactory)

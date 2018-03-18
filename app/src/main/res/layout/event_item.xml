@@ -2,7 +2,7 @@
     <layout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools">
-        <data class="EventItemViewBinding">
+        <data class="EventItemBinding">
             <variable
                 name="viewModel"
                 type="com.java.eventhike.feature.home.event.EventItemViewModel"/>

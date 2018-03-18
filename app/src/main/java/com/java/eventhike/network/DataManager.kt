@@ -1,5 +1,5 @@
 package com.java.eventhike.network
-import com.java.eventhike.model.temp1.EventsItem
+import com.java.eventhike.model.EventsItem
 import rx.Observable
 
 /**

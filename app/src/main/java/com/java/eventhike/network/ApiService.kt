@@ -1,6 +1,6 @@
 package com.java.eventhike.network
 
-import com.java.eventhike.model.temp1.EventsItem
+import com.java.eventhike.model.EventsItem
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path

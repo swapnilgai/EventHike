@@ -9,7 +9,9 @@ import com.google.android.gms.location.places.Place
 import com.google.android.gms.location.places.ui.PlaceAutocomplete
 import com.google.android.gms.maps.model.LatLng
 import com.java.eventhike.R
+import com.java.eventhike.feature.home.event.list.ListFragment
 import com.java.eventhike.feature.home.event.list.ListNavigator
+import com.java.eventhike.feature.home.event.map.MapFragment
 import com.java.eventhike.model.EventsItem
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
@@ -17,9 +19,9 @@ import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity(), ListNavigator {
 
+    @Inject lateinit var mListFragment: ListFragment
 
-    @Inject
-
+    @Inject lateinit var mMapFragment: MapFragment
 
     val PLACE_AUTOCOMPLETE_REQUEST_CODE = 1
 
@@ -41,6 +43,7 @@ class HomeActivity : AppCompatActivity(), ListNavigator {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         autoSuggestHomeTextView.setOnClickListener { searchBarOnClick() }
     }

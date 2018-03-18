@@ -19,11 +19,11 @@ import javax.inject.Inject
  */
 class ListFragment : Fragment() {
 
-    @Inject
-    val mListRecyclerAdapter: ListRecyclerAdapter? = null
 
-    @Inject
-    val  mEventViewModel: EventViewModel? = null
+    public var mListRecyclerAdapter: ListRecyclerAdapter? = null
+
+
+    @Inject lateinit var mEventViewModel: EventViewModel
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

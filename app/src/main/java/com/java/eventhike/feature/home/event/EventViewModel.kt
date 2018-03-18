@@ -14,11 +14,9 @@ open class EventViewModel(var mDataManager: DataManager?) : BaseObservable() {
     var eventsItem: EventsItem? = null
     var lat: Double = 0.0
     var lng: Double = 0.0
-    val items: ObservableList<EventsItem> = ObservableArrayList()
-
+    open val items: ObservableList<EventsItem> = ObservableArrayList()
 
     fun loadEvent(){
-
     }
 
     private fun updateLatLng(lat: Double, lng: Double){
