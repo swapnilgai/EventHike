@@ -2,13 +2,14 @@
     <layout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools">
-        <data class="ListItemViewBinding">
+        <data class="EventItemViewBinding">
             <variable
                 name="viewModel"
-                type="com.java.eventhike.feature.home.list.ListItemViewModel"/>
+                type="com.java.eventhike.feature.home.event.EventItemViewModel"/>
         </data>
 
 <android.support.constraint.ConstraintLayout
+    android:id="@+id/eventItemConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp">
