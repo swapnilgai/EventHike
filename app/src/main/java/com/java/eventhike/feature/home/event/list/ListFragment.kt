@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.java.eventhike.R
 import com.java.eventhike.feature.home.EndlessScrollListener
+import com.java.eventhike.feature.home.HomeActivity
+import com.java.eventhike.feature.home.event.EventRecyclerAdapter
 import com.java.eventhike.feature.home.event.EventViewModel
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
@@ -19,18 +21,21 @@ import javax.inject.Inject
  */
 class ListFragment : Fragment() {
 
-
-    public var mListRecyclerAdapter: ListRecyclerAdapter? = null
-
+    @Inject lateinit  var mEventRecyclerAdapter: EventRecyclerAdapter
 
     @Inject lateinit var mEventViewModel: EventViewModel
+
+    lateinit var mActivity : HomeActivity
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
+        mActivity = activity as HomeActivity
+        mActivity.mHomeComponent.inject(this)
+
         listRecyclerView.layoutManager = LinearLayoutManager(context)
-        listRecyclerView.adapter = mListRecyclerAdapter
+        listRecyclerView.adapter = mEventRecyclerAdapter
 
         val endlessScrollListener = object : EndlessScrollListener(listRecyclerView.layoutManager as LinearLayoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {

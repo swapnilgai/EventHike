@@ -9,19 +9,29 @@ import com.google.android.gms.location.places.Place
 import com.google.android.gms.location.places.ui.PlaceAutocomplete
 import com.google.android.gms.maps.model.LatLng
 import com.java.eventhike.R
+import com.java.eventhike.di.Component.DaggerHomeComponent
+import com.java.eventhike.di.Component.HomeComponent
+import com.java.eventhike.di.module.EventRecyclerAdapterModule
+import com.java.eventhike.di.module.FragmentManagerModule
+import com.java.eventhike.di.module.NetModule
+import com.java.eventhike.feature.home.event.EventNavigator
+import com.java.eventhike.feature.home.event.EventViewModel
 import com.java.eventhike.feature.home.event.list.ListFragment
-import com.java.eventhike.feature.home.event.list.ListNavigator
 import com.java.eventhike.feature.home.event.map.MapFragment
 import com.java.eventhike.model.EventsItem
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 
 
-class HomeActivity : AppCompatActivity(), ListNavigator {
+class HomeActivity : AppCompatActivity(), EventNavigator {
 
     @Inject lateinit var mListFragment: ListFragment
 
     @Inject lateinit var mMapFragment: MapFragment
+
+    @Inject lateinit var mEventViewModel: EventViewModel
+
+    lateinit var mHomeComponent : HomeComponent
 
     val PLACE_AUTOCOMPLETE_REQUEST_CODE = 1
 
@@ -43,6 +53,13 @@ class HomeActivity : AppCompatActivity(), ListNavigator {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        mHomeComponent = DaggerHomeComponent.builder().netModule(NetModule(getString(R.string.Base_Url)))
+                .fragmentManagerModule(FragmentManagerModule(supportFragmentManager))
+                .eventRecyclerAdapterModule(EventRecyclerAdapterModule(this))
+                .build()
+
+        mHomeComponent.inject(this)
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         autoSuggestHomeTextView.setOnClickListener { searchBarOnClick() }
@@ -72,7 +89,7 @@ class HomeActivity : AppCompatActivity(), ListNavigator {
     }
 
     private fun getEvents(latLng: LatLng){
-
+        mEventViewModel.loadEvent(latLng)
     }
 
     override fun onEventItemClick(eventsItem: EventsItem) {

@@ -1,4 +1,4 @@
-package com.java.eventhike.feature.home.event.list
+package com.java.eventhike.feature.home.event
 
 import com.java.eventhike.model.EventsItem
 
@@ -6,6 +6,6 @@ import com.java.eventhike.model.EventsItem
 /**
  * Created by swapnil on 3/16/18.
  */
-interface ListNavigator{
+interface EventNavigator{
      fun onEventItemClick(eventsItem: EventsItem);
 }

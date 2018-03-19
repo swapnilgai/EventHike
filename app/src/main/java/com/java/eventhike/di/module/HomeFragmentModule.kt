@@ -10,7 +10,7 @@ import javax.inject.Singleton
  * Created by swapnil on 3/17/18.
  */
 
-@Module(includes = arrayOf(EventViewModelModule::class))
+@Module
 class HomeFragmentModule {
     @Provides
     @Singleton

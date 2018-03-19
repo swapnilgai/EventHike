@@ -1,6 +1,6 @@
 package com.java.eventhike.di.module
 
-import android.app.FragmentManager
+import android.support.v4.app.FragmentManager
 import com.java.eventhike.feature.home.event.EventViewModel
 import com.java.eventhike.network.DataManager
 import com.java.eventhike.util.ViewModelHolder
@@ -23,8 +23,7 @@ class EventViewModelModule (){
     fun findOrCreateAutoSuggestViewModel(dataManager: DataManager, fragmentManager: FragmentManager): EventViewModel {
         // In a configuration change we might have a ViewModel present. It's retained using the
         // Fragment Manager.
-        val retainedViewModel = fragmentManager
-                .findFragmentByTag(EVENT_VIEW_MODEL) as ViewModelHolder<EventViewModel>
+        val retainedViewModel = fragmentManager.findFragmentByTag(EVENT_VIEW_MODEL) as? ViewModelHolder<EventViewModel>
 
         return if (retainedViewModel != null && retainedViewModel.getViewModel() != null) {
             // If the model was retained, return it.
