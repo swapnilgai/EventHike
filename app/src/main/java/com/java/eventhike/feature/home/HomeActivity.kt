@@ -61,6 +61,8 @@ class HomeActivity : AppCompatActivity(), EventNavigator {
 
         mHomeComponent.inject(this)
 
+        supportFragmentManager.beginTransaction().add(R.id.fragment_content, mListFragment).commit()
+
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         autoSuggestHomeTextView.setOnClickListener { searchBarOnClick() }
     }

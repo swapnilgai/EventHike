@@ -8,12 +8,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.java.eventhike.R
+import com.java.eventhike.databinding.ListFragmentBinding
 import com.java.eventhike.feature.home.EndlessScrollListener
 import com.java.eventhike.feature.home.HomeActivity
 import com.java.eventhike.feature.home.event.EventRecyclerAdapter
 import com.java.eventhike.feature.home.event.EventViewModel
-import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
 
 /**
@@ -27,25 +26,30 @@ class ListFragment : Fragment() {
 
     lateinit var mActivity : HomeActivity
 
+    lateinit var mListFragmentBinding: ListFragmentBinding
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+        mListFragmentBinding = ListFragmentBinding.inflate(inflater!!, container, false) as ListFragmentBinding
 
         mActivity = activity as HomeActivity
         mActivity.mHomeComponent.inject(this)
 
-        listRecyclerView.layoutManager = LinearLayoutManager(context)
-        listRecyclerView.adapter = mEventRecyclerAdapter
+        mListFragmentBinding.viewModel = mEventViewModel
 
-        val endlessScrollListener = object : EndlessScrollListener(listRecyclerView.layoutManager as LinearLayoutManager) {
+        mListFragmentBinding.listRecyclerView.layoutManager = LinearLayoutManager(context)
+        mListFragmentBinding.listRecyclerView.adapter = mEventRecyclerAdapter
+
+        val endlessScrollListener = object : EndlessScrollListener(mListFragmentBinding.listRecyclerView.layoutManager as LinearLayoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         }
 
-        listRecyclerView.addOnScrollListener(endlessScrollListener)
+        mListFragmentBinding.listRecyclerView.addOnScrollListener(endlessScrollListener)
 
-        return inflater!!.inflate(R.layout.fragment_list, container, false)
+        return mListFragmentBinding.root
     }
 
     fun loadEvent(page: Int) {

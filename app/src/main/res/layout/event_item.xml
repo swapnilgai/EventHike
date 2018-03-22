@@ -11,14 +11,14 @@
 <android.support.constraint.ConstraintLayout
     android:id="@+id/eventItemConstraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp">
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:src="@color/colorAccent"/>
+        app:imageUrl = "@{viewModel.eventsItem.coverPicture}" />
 
     <TextView
         android:id="@+id/event_name"
@@ -28,7 +28,7 @@
         android:paddingBottom="8dp"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
-        android:text="Event Name"
+        android:text="@{viewModel.eventsItem.name}"
         android:textColor="@android:color/white"
         android:textSize="22dp"
         app:layout_constraintBottom_toBottomOf="@+id/image"/>
@@ -37,7 +37,7 @@
         android:id="@+id/event_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="10 Sat 2016 : 2:13Pm"
+        android:text="@{viewModel.eventsItem.startTime}"
         android:layout_marginTop="12dp"
         android:textSize="20sp"
         android:textColor="#FF4A4A4A"
@@ -59,7 +59,6 @@
         android:id="@+id/driving_distance_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1.83 mi"
         android:textSize="16sp"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"
@@ -80,7 +79,6 @@
         android:id="@+id/mile_away_label"
         android:layout_width="wrap_content"
         android:layout_height="20sp"
-        android:text="1hr 30min"
         android:textSize="16sp"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"

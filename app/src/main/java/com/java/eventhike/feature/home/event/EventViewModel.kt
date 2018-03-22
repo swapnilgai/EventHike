@@ -45,11 +45,9 @@ open class EventViewModel(var mDataManager: DataManager?) : BaseObservable() {
 
    }
 
-    fun postProcess(mEventListResponse: EventListResponse){
-
-    }
-
-    fun addEventItems(eventsItem: List<EventsItem>){
+    private fun postProcess(mEventListResponse: EventListResponse){
+        items.clear()
+        mEventListResponse.events?.let { items.addAll(it) };
     }
 
     fun onError(mThrowable: Throwable){

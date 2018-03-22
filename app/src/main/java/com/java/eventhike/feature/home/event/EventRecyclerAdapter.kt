@@ -17,7 +17,7 @@ import com.java.eventhike.util.ArrayRecyclerAdapter
 class EventRecyclerAdapter(var mEventNavigator: EventNavigator): ArrayRecyclerAdapter<EventsItem, ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder{
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
         val viewBinding = DataBindingUtil.inflate<EventItemBinding>(
                 LayoutInflater.from(parent?.context),
                 R.layout.event_item,
@@ -33,11 +33,21 @@ class EventRecyclerAdapter(var mEventNavigator: EventNavigator): ArrayRecyclerAd
             mEventItemViewModel.mEventNavigator = mEventNavigator
             holder.binding.viewModel = mEventItemViewModel
         }
+//        else if(){
+//            val mEventItemViewModel = EventItemViewModel(null);
+//            mEventItemViewModel.eventsItem = getItem(position)
+//            mEventItemViewModel.mEventNavigator = mEventNavigator
+//            holder.binding.viewModel = mEventItemViewModel
+//        }
     }
 
     override fun getItemViewType(position: Int): Int {
         return position
     }
 
-    inner class DataResultHolder(val binding: EventItemBinding) : RecyclerView.ViewHolder(binding.eventItemConstraintLayout)
+    inner class DataResultHolder(val binding: EventItemBinding) : RecyclerView.ViewHolder(binding.root )
+
+
+//    inner class DataMapResultHolder(val binding: EventMapItemBinding) : RecyclerView.ViewHolder(binding.root )
+
 }
