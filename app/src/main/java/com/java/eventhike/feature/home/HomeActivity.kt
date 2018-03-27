@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.CoordinatorLayout
 import android.support.v7.app.AppCompatActivity
 import com.google.android.gms.location.places.Place
 import com.google.android.gms.location.places.ui.PlaceAutocomplete
@@ -19,8 +20,11 @@ import com.java.eventhike.feature.home.event.EventViewModel
 import com.java.eventhike.feature.home.event.list.ListFragment
 import com.java.eventhike.feature.home.event.map.MapFragment
 import com.java.eventhike.model.EventsItem
+import com.java.eventhike.util.BottomNavigationViewBehavior
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
+
+
 
 
 class HomeActivity : AppCompatActivity(), EventNavigator {
@@ -37,13 +41,18 @@ class HomeActivity : AppCompatActivity(), EventNavigator {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigation_home -> {
+            R.id.navigation_list -> {
+                supportFragmentManager.beginTransaction().hide(mMapFragment).commit()
+                supportFragmentManager.beginTransaction().show(mListFragment).commit()
+
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
+            R.id.navigation_map -> {
+                supportFragmentManager.beginTransaction().hide(mListFragment).commit()
+                supportFragmentManager.beginTransaction().show(mMapFragment).commit()
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_notifications -> {
+            R.id.navigation_setting -> {
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -61,10 +70,16 @@ class HomeActivity : AppCompatActivity(), EventNavigator {
 
         mHomeComponent.inject(this)
 
-        supportFragmentManager.beginTransaction().add(R.id.fragment_content, mListFragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fragment_content, mMapFragment)
+                                                 .add(R.id.fragment_content, mListFragment)
+                                                 .commit()
+
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         autoSuggestHomeTextView.setOnClickListener { searchBarOnClick() }
+
+        val layoutParams = navigation.getLayoutParams() as CoordinatorLayout.LayoutParams
+        layoutParams.behavior = BottomNavigationViewBehavior()
     }
 
     private fun searchBarOnClick(){

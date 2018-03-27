@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import com.java.eventhike.databinding.ListFragmentBinding
 import com.java.eventhike.feature.home.EndlessScrollListener
 import com.java.eventhike.feature.home.HomeActivity
-import com.java.eventhike.feature.home.event.EventRecyclerAdapter
 import com.java.eventhike.feature.home.event.EventViewModel
 import javax.inject.Inject
 
@@ -20,7 +19,7 @@ import javax.inject.Inject
  */
 class ListFragment : Fragment() {
 
-    @Inject lateinit  var mEventRecyclerAdapter: EventRecyclerAdapter
+    @Inject lateinit  var mEventRecyclerAdapter: ListEventRecyclerAdapter
 
     @Inject lateinit var mEventViewModel: EventViewModel
 

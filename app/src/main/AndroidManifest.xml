@@ -18,10 +18,10 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAyKFq399mPE3pgNFF-s0ERTcIbOUiNqgY"/>
+
         <activity
             android:name=".feature.home.HomeActivity"
-            android:label="@string/app_name"
-            android:theme = "@style/NoActionBar" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -29,8 +29,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".feature.home.setting.MapsActivity"
+            android:name=".feature.home.temp.MapsActivity"
             android:label="@string/title_activity_maps">
         </activity>
     </application>
+
 </manifest>

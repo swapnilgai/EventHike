@@ -1,22 +1,22 @@
-package com.java.eventhike.feature.home.event
+package com.java.eventhike.feature.home.event.list
 
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.java.eventhike.R
 import com.java.eventhike.databinding.EventItemBinding
+import com.java.eventhike.feature.home.event.EventItemViewModel
+import com.java.eventhike.feature.home.event.EventNavigator
 import com.java.eventhike.model.EventsItem
 import com.java.eventhike.util.ArrayRecyclerAdapter
 
-
 /**
- * Created by swapnil on 3/12/18.
+ * Created by swapnil on 3/25/18.
  */
-class EventRecyclerAdapter(var mEventNavigator: EventNavigator): ArrayRecyclerAdapter<EventsItem, ViewHolder>(){
+class ListEventRecyclerAdapter(var mEventNavigator: EventNavigator): ArrayRecyclerAdapter<EventsItem, RecyclerView.ViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
 
         val viewBinding = DataBindingUtil.inflate<EventItemBinding>(
                 LayoutInflater.from(parent?.context),
@@ -33,12 +33,7 @@ class EventRecyclerAdapter(var mEventNavigator: EventNavigator): ArrayRecyclerAd
             mEventItemViewModel.mEventNavigator = mEventNavigator
             holder.binding.viewModel = mEventItemViewModel
         }
-//        else if(){
-//            val mEventItemViewModel = EventItemViewModel(null);
-//            mEventItemViewModel.eventsItem = getItem(position)
-//            mEventItemViewModel.mEventNavigator = mEventNavigator
-//            holder.binding.viewModel = mEventItemViewModel
-//        }
+
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -46,8 +41,4 @@ class EventRecyclerAdapter(var mEventNavigator: EventNavigator): ArrayRecyclerAd
     }
 
     inner class DataResultHolder(val binding: EventItemBinding) : RecyclerView.ViewHolder(binding.root )
-
-
-//    inner class DataMapResultHolder(val binding: EventMapItemBinding) : RecyclerView.ViewHolder(binding.root )
-
 }
