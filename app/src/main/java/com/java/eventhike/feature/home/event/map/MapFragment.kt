@@ -62,15 +62,17 @@ class MapFragment() : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLis
 
         subscribeToEventList()
 
-        val mapFragment = fragmentManager
+        val mapFragment = childFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment?
+
         mapFragment?.getMapAsync(this)
 
         return mMapFragmentBinding.root
     }
 
     override fun onMapReady(mGoogleMap: GoogleMap?) {
-           mGoogleMap?.let { this.mGoogleMap = it
+           mGoogleMap?.let {
+               this.mGoogleMap = it
                this.mGoogleMap.setOnMarkerClickListener(this);
            }
     }
@@ -89,7 +91,7 @@ class MapFragment() : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         private  fun updateMap(mEventList: List<EventsItem>){
                 mEventList.forEach {
                    if( it.place?.location?.latitude !=null &&  it.place?.location?.longitude !=null){
-                       var marker = mGoogleMap.addMarker(MarkerOptions()
+                       var marker = mGoogleMap?.addMarker(MarkerOptions()
                                 .position(LatLng(it.place?.location?.latitude,  it.place?.location?.longitude))
                                 .title(it.name)) as Marker
                        builder.include(marker.position)
@@ -106,7 +108,7 @@ class MapFragment() : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLis
 
         if(mMarkerMap.containsKey(marker)){
               var pair = mMarkerMap.get(marker) as Pair
-              mMapFragmentBinding.mapRecyclerView.smoothScrollBy(pair.first, 0)
+              mMapFragmentBinding.mapRecyclerView.smoothScrollToPosition(pair.first-1)
         }
         return true
     }
