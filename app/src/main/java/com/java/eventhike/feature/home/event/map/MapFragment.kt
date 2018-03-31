@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -41,7 +42,7 @@ class MapFragment() : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLis
 
     private val mSubscriptions = CompositeSubscription()
 
-    private var builder = LatLngBounds.Builder()
+    private var builder = LatLngBounds.builder()
 
     private var count: Int = 0
 
@@ -98,14 +99,13 @@ class MapFragment() : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLis
                        mMarkerMap.put(marker, Pair(count++, it))
                    }
                 }
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 150));
         }
 
     private fun updateError(mThrowable: Throwable){
-
-        }
+    }
 
     override fun onMarkerClick(marker: Marker?): Boolean {
-
         if(mMarkerMap.containsKey(marker)){
               var pair = mMarkerMap.get(marker) as Pair
               mMapFragmentBinding.mapRecyclerView.smoothScrollToPosition(pair.first-1)
