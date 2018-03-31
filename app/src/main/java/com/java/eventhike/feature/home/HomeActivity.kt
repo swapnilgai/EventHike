@@ -3,9 +3,12 @@ package com.java.eventhike.feature.home
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.CollapsingToolbarLayout
 import android.support.design.widget.CoordinatorLayout
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.google.android.gms.location.places.Place
 import com.google.android.gms.location.places.ui.PlaceAutocomplete
 import com.google.android.gms.maps.model.LatLng
@@ -80,6 +83,26 @@ class HomeActivity : AppCompatActivity(), EventNavigator {
 
         val layoutParams = navigation.getLayoutParams() as CoordinatorLayout.LayoutParams
         layoutParams.behavior = BottomNavigationViewBehavior()
+
+        val collapsingToolbarLayout = findViewById<View>(R.id.toolbar_layout) as CollapsingToolbarLayout
+        val appBarLayout = findViewById<View>(R.id.app_bar) as AppBarLayout
+        appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
+            internal var isShow = true
+            internal var scrollRange = -1
+
+            override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.totalScrollRange
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbarLayout.title = autoSuggestHomeTextView.text
+                    isShow = true
+                } else if (isShow) {
+                    collapsingToolbarLayout.title = " "//carefull there should a space between double quote otherwise it wont work
+                    isShow = false
+                }
+            }
+        })
     }
 
     private fun searchBarOnClick(){
