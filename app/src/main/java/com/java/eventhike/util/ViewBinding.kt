@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.java.eventhike.R
 import com.java.eventhike.model.EventsItem
 
 
@@ -16,12 +17,9 @@ import com.java.eventhike.model.EventsItem
     @BindingAdapter("items")
      fun  setSchoolList(view: RecyclerView, list: List<EventsItem>) {
      var adapter = view.adapter as ArrayRecyclerAdapter<EventsItem, *>
-
-    if (adapter != null) {
             adapter.clear()
             adapter.addAll(list)
             adapter.notifyDataSetChanged()
-        }
     }
 
     @BindingAdapter("imageUrl")
@@ -35,5 +33,8 @@ import com.java.eventhike.model.EventsItem
 
     @BindingAdapter("android:text")
     fun setText(view: TextView, value: Int) {
-            view.setText(value)
+           if(view.id==R.id.event_time)
+                view.text = view.getResources().getQuantityString(R.plurals.start_date, value)
+           else
+               view.setText(value)
     }

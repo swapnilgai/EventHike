@@ -4,12 +4,10 @@ package com.java.eventhike.feature.home.event.list
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.java.eventhike.databinding.ListFragmentBinding
-import com.java.eventhike.feature.home.EndlessScrollListener
 import com.java.eventhike.feature.home.HomeActivity
 import com.java.eventhike.feature.home.event.EventViewModel
 import javax.inject.Inject
@@ -40,13 +38,13 @@ class ListFragment : Fragment() {
         mListFragmentBinding.listRecyclerView.layoutManager = LinearLayoutManager(context)
         mListFragmentBinding.listRecyclerView.adapter = mEventRecyclerAdapter
 
-        val endlessScrollListener = object : EndlessScrollListener(mListFragmentBinding.listRecyclerView.layoutManager as LinearLayoutManager) {
-            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        }
+//        val endlessScrollListener = object : EndlessScrollListener(mListFragmentBinding.listRecyclerView.layoutManager as LinearLayoutManager) {
+//            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//            }
+//        }
 
-        mListFragmentBinding.listRecyclerView.addOnScrollListener(endlessScrollListener)
+     //   mListFragmentBinding.listRecyclerView.addOnScrollListener(endlessScrollListener)
 
         return mListFragmentBinding.root
     }

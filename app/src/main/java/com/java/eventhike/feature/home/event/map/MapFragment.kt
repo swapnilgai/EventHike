@@ -50,7 +50,7 @@ class MapFragment() : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLis
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        mMapFragmentBinding = MapFragmentBinding.inflate(inflater!!, container, false) as MapFragmentBinding
+        mMapFragmentBinding = MapFragmentBinding.inflate(inflater!!, container, false)
 
         mActivity = activity as HomeActivity
         mActivity.mHomeComponent.inject(this)
@@ -80,9 +80,9 @@ class MapFragment() : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLis
     private fun subscribeToEventList(){
 
     mEventViewModel.getSourceObservable()
-                ?.subscribeOn(Schedulers.io())
-                ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe {
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
                     updateMap(it);
                     updateError(Throwable())
                 }
@@ -90,9 +90,9 @@ class MapFragment() : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLis
 
         private  fun updateMap(mEventList: List<EventsItem>){
                 mEventList.forEach {
-                   if( it.place?.location?.latitude !=null &&  it.place?.location?.longitude !=null){
-                       var marker = mGoogleMap?.addMarker(MarkerOptions()
-                                .position(LatLng(it.place?.location?.latitude,  it.place?.location?.longitude))
+                   if( it.place?.location?.latitude !=null &&  it.place.location.longitude !=null){
+                       var marker = mGoogleMap.addMarker(MarkerOptions()
+                                .position(LatLng(it.place.location.latitude,  it.place.location.longitude))
                                 .title(it.name)) as Marker
                        builder.include(marker.position)
                        mMarkerMap.put(marker, Pair(count++, it))

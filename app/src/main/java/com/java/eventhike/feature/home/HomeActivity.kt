@@ -94,7 +94,7 @@ class HomeActivity : AppCompatActivity(), EventNavigator {
                 setLocationText(PlaceAutocomplete.getPlace(this, data))
                 getEvents(PlaceAutocomplete.getPlace(this, data).latLng)
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
-                val status = PlaceAutocomplete.getStatus(this, data)
+                 PlaceAutocomplete.getStatus(this, data)
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 // The user canceled the operation.
             }

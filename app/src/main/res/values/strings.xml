@@ -10,4 +10,10 @@
     <string name="title_List">List</string>
     <string name="title_activity_maps">Map</string>
 
+    <plurals name="start_date">
+        <item quantity="zero">Today</item>
+        <item quantity="one">Tomorrow</item>
+        <item quantity="other">In %d days</item>
+    </plurals>
+
 </resources>
