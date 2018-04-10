@@ -24,7 +24,7 @@ import com.java.eventhike.model.EventsItem
 
     @BindingAdapter("imageUrl")
     fun loadNetworkImage(imageView: ImageView, url: String) {
-        Glide.with(imageView.getContext())
+        Glide.with(imageView.context)
                 .load(url)
                 .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
@@ -33,8 +33,10 @@ import com.java.eventhike.model.EventsItem
 
     @BindingAdapter("android:text")
     fun setText(view: TextView, value: Int) {
-           if(view.id==R.id.event_time)
-                view.text = view.getResources().getQuantityString(R.plurals.start_date, value)
+           if(view.id==R.id.event_time) {
+               val textStr = view.resources.getQuantityString(R.plurals.start_date, value, value)
+               view.text = textStr
+           }
            else
-               view.setText(value)
+               view.text = value.toString()
     }

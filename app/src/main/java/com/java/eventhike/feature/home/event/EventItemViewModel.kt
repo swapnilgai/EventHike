@@ -13,12 +13,14 @@ open class EventItemViewModel(mDataManager: DataManager?): EventViewModel(mDataM
 
     fun getDateTime(): Int {
             var time = 0
-            time = eventsItem?.timeFromNow?.div(60) ?:0
+            time = eventsItem?.timeFromNow?.div(86400) ?:0
             if(time <= 24)
                 return 1
             else if(time <=48)
                 return 2;
-            else
-                return  time/24
+            else{
+                var newTime =  time.div(24) as Int
+                return newTime
+            }
     }
 }
