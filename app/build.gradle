@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.java.gitgist"
+        applicationId "com.java.eventhike"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -78,6 +78,9 @@ dependencies {
 
     // https://mvnrepository.com/artifact/joda-time/joda-time
     compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
+
+    compile 'com.github.johnkil.android-robototextview:robototextview:4.0.0'
+
 }
 repositories {
     mavenCentral()
