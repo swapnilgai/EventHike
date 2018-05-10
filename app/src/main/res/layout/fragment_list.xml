@@ -1,0 +1,23 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".feature.home.event.list.ListFragment">
+    <data class="ListFragmentBinding">
+        <variable
+            name="viewModel"
+            type="com.java.eventhike.feature.home.event.EventViewModel"/>
+    </data>
+    <android.support.constraint.ConstraintLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:background="@android:color/white">
+
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/listRecyclerView"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          app:items = "@{viewModel.items}"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
