@@ -7,13 +7,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.java.eventhike.R
 import com.java.eventhike.databinding.MapFragmentBinding
 import com.java.eventhike.feature.home.HomeActivity
@@ -50,7 +48,7 @@ class MapFragment() : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLis
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        mMapFragmentBinding = MapFragmentBinding.inflate(inflater!!, container, false) as MapFragmentBinding
+        mMapFragmentBinding = MapFragmentBinding.inflate(inflater!!, container, false)
 
         mActivity = activity as HomeActivity
         mActivity.mHomeComponent.inject(this)
@@ -80,9 +78,9 @@ class MapFragment() : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLis
     private fun subscribeToEventList(){
 
     mEventViewModel.getSourceObservable()
-                ?.subscribeOn(Schedulers.io())
-                ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe {
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
                     updateMap(it);
                     updateError(Throwable())
                 }
@@ -90,15 +88,21 @@ class MapFragment() : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLis
 
         private  fun updateMap(mEventList: List<EventsItem>){
                 mEventList.forEach {
-                   if( it.place?.location?.latitude !=null &&  it.place?.location?.longitude !=null){
-                       var marker = mGoogleMap?.addMarker(MarkerOptions()
-                                .position(LatLng(it.place?.location?.latitude,  it.place?.location?.longitude))
-                                .title(it.name)) as Marker
+                   if( it.place?.location?.latitude !=null &&  it.place.location.longitude !=null){
+                       var marker = mGoogleMap.addMarker(MarkerOptions()
+                                .position(LatLng(it.place.location.latitude,  it.place.location.longitude))
+                               .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_pin))
+                               .title(it.name)) as Marker
                        builder.include(marker.position)
                        mMarkerMap.put(marker, Pair(count++, it))
                    }
                 }
+            animateCam()
         }
+
+    private fun animateCam(){
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 200));
+    }
 
     private fun updateError(mThrowable: Throwable){
 

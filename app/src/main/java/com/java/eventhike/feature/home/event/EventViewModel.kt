@@ -27,7 +27,7 @@ open class EventViewModel(var mDataManager: DataManager?) : BaseObservable() {
     fun loadEvent(mLatLng: LatLng){
         //TODO load data from shared preference
         updateLatLng(mLatLng.latitude, mLatLng.longitude)
-        mDataManager?.getEvents(mLatLng.latitude, mLatLng.longitude, 100,"venue", 100, "250414581969875%7Cdt5jSQD2oOs8MM32Blvh-YbvG0I")
+        mDataManager?.getEvents(mLatLng.latitude, mLatLng.longitude, 50,"venue", 100, "250414581969875%7Cdt5jSQD2oOs8MM32Blvh-YbvG0I")
                 ?.subscribeOn(Schedulers.computation())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe(
